@@ -1,15 +1,18 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class WorkoutLog {
 
     private int workout_id;
     private int user_id;
-    private LocalDateTime date;
+    private Date date;
     private Float duration;
 
-    public WorkoutLog(int workout_id, int user_id, LocalDateTime date, Float duration) {
+    public WorkoutLog() {}
+
+    public WorkoutLog(int workout_id, int user_id, Date date, Float duration) {
         this.workout_id = workout_id;
         this.user_id = user_id;
         this.date = date;
@@ -32,11 +35,11 @@ public class WorkoutLog {
         this.user_id = user_id;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
