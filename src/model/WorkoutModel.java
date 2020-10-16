@@ -24,7 +24,8 @@ public class WorkoutModel {
     }
 
     public void getDeleteDetails(int selectedIndex) {
-        deleteManager.sqlDelete(this.databaseHandler, selectedIndex);
+
+        deleteManager.sqlDelete(this.databaseHandler, selectedIndex, this.displayManager.getLogObjects());
     }
 
     public void getUpdateDetails() {

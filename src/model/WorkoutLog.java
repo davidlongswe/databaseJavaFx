@@ -1,23 +1,20 @@
 package model;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
+
 
 public class WorkoutLog {
 
     private int workout_id;
     private int user_id;
-    private Date date;
+    private Timestamp timestamp;
     private Float duration;
 
     public WorkoutLog() {}
-
-    public WorkoutLog(int workout_id, int user_id, Date date, Float duration) {
-        this.workout_id = workout_id;
-        this.user_id = user_id;
-        this.date = date;
-        this.duration = duration;
-    }
 
     public int getWorkout_id() {
         return workout_id;
@@ -35,12 +32,12 @@ public class WorkoutLog {
         this.user_id = user_id;
     }
 
-    public Date getDate() {
-        return date;
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 
     public Float getDuration() {
@@ -50,5 +47,4 @@ public class WorkoutLog {
     public void setDuration(Float duration) {
         this.duration = duration;
     }
-
 }

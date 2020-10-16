@@ -26,21 +26,37 @@ public class DisplayManager {
             this.statement = dbh.getDbConnection().createStatement();
             this.resultSet = statement.executeQuery(displayQuery);
             while(resultSet.next()){
-                WorkoutLog workoutLog = new WorkoutLog();
-                workoutLog.setWorkout_id(resultSet.getInt("workout_id"));
-                workoutLog.setUser_id(resultSet.getInt("user_id"));
-                workoutLog.setDate(resultSet.getDate("date"));
-                workoutLog.setDuration(resultSet.getFloat("duration"));
-                logObjects.add(workoutLog);
-                workoutLogs.add(resultSet.getString("name") + " " +
-                        resultSet.getString("email") + " " +
-                        resultSet.getDate("date") + " " +
-                        resultSet.getString("type"));
+                addWorkoutToWorkoutLog();
+                workoutLogs.add(resultSet.getInt("user_id") + " " +
+                        resultSet.getString("name") + " " +
+                        resultSet.getString("type") + " " +
+                        resultSet.getFloat("duration") + " " +
+                        resultSet.getTimestamp("date"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         dbh.disconnect();
+        for(WorkoutLog workoutLog : logObjects){
+            System.out.println(workoutLog.getUser_id());
+            System.out.println(workoutLog.getWorkout_id());
+            System.out.println(workoutLog.getDuration());
+            System.out.println(workoutLog.getTimestamp());
+        }
+    }
+
+    public void addWorkoutToWorkoutLog(){
+        try {
+            WorkoutLog workoutLog = new WorkoutLog();
+            workoutLog.setWorkout_id(resultSet.getInt("workout_id"));
+            workoutLog.setUser_id(resultSet.getInt("user_id"));
+            workoutLog.setTimestamp(resultSet.getTimestamp("date"));
+            workoutLog.setDuration(resultSet.getFloat("duration"));
+            logObjects.add(workoutLog);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public ArrayList<WorkoutLog> getLogObjects() {
