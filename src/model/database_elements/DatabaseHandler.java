@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DatabaseHandler {
 
-    private final String DB_URL = "jdbc:mariadb://atlantis.informatik.umu.se/svph1910_db_ht2020";
+    private final String DB_URL = "jdbc:mariadb://atlantis.informatik.umu.se/svph1917_db_ht2020";
     private Connection dbConnection;
     private DatabaseAccount databaseAccount;
 

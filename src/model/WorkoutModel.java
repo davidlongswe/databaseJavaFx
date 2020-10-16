@@ -23,8 +23,8 @@ public class WorkoutModel {
         displayManager.sqlDisplay(this.databaseHandler);
     }
 
-    public void getDeleteDetails() {
-        deleteManager.sqlDelete(this.databaseHandler);
+    public void getDeleteDetails(int selectedIndex) {
+        deleteManager.sqlDelete(this.databaseHandler, selectedIndex);
     }
 
     public void getUpdateDetails() {

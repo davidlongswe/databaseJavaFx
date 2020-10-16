@@ -6,8 +6,8 @@ public class DatabaseAccount {
     private String password;
 
     public DatabaseAccount(){
-        this.user = "svph1910_2020273";
-        this.password = "yvytynyny";
+        this.user = "svph1917_2020273";
+        this.password = "usubypuju";
     }
 
     public String getUser() {

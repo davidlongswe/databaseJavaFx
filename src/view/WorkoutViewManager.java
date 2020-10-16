@@ -188,13 +188,15 @@ public class WorkoutViewManager extends Application {
             showSubScene(updateSubScene);
         });
         deleteBtn.setOnMouseClicked(mouseEvent -> {
-            workoutModel.getDeleteDetails();
+            workoutModel.getDeleteDetails(selectedIndex);
+
         });
     }
 
     public static void main(String[] args) {
         launch(args);
     }
+
 
 }
 
