@@ -49,6 +49,7 @@ public class WorkoutViewManager extends Application {
         createSubScenes();
         show(stage);
         displayList();
+        setButtonListeners();
     }
 
     private void show(Stage stage) {
@@ -175,27 +176,25 @@ public class WorkoutViewManager extends Application {
 
     public void setButtonListeners(){
         addBtn.setOnMouseClicked(mouseEvent -> {
-
+            showSubScene(insertSubScene);
         });
         subSceneInsertBtn.setOnMouseClicked(mouseEvent -> {
-
+            workoutModel.getInsertDetails();
         });
         subSceneUpdateBtn.setOnMouseClicked(mouseEvent -> {
-
+            workoutModel.getUpdateDetails();
         });
         updateBtn.setOnMouseClicked(mouseEvent ->  {
-
+            showSubScene(updateSubScene);
         });
         deleteBtn.setOnMouseClicked(mouseEvent -> {
             workoutModel.getDeleteDetails();
-
         });
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-
 
 }
 
