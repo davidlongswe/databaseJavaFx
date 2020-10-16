@@ -2,18 +2,18 @@ package model;
 
 import java.time.LocalDateTime;
 
-public class Workoutlog {
+public class WorkoutLog {
+
     private int workout_id;
     private int user_id;
     private LocalDateTime date;
     private Float duration;
 
-    public Workoutlog(int workout_id, int user_id, LocalDateTime date, Float duration) {
+    public WorkoutLog(int workout_id, int user_id, LocalDateTime date, Float duration) {
         this.workout_id = workout_id;
         this.user_id = user_id;
         this.date = date;
         this.duration = duration;
-
     }
 
     public int getWorkout_id() {
@@ -47,4 +47,5 @@ public class Workoutlog {
     public void setDuration(Float duration) {
         this.duration = duration;
     }
+
 }
