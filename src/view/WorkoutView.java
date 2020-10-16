@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.application.Application;
+import model.database_elements.DatabaseHandler;
 import view.subscenes.CustomSubScene;
 import view.subscenes.InsertSubScene;
 import view.subscenes.UpdateSubScene;
@@ -30,6 +31,9 @@ public class WorkoutView extends Application {
     ObservableList. Our data source.
     */
     private final ObservableList<String> workouts =
+
+
+
             FXCollections.observableArrayList(
                     ("Joakim " + "joakim@gmail.com " + "1.0 " + "2020-09-18 18:32:40 " + "Gym "));
     private int selectedIndex=-1;
@@ -43,8 +47,8 @@ public class WorkoutView extends Application {
         createButtons();
         setUpButtonBox();
         setUpWorkoutLogContentBox();
-        //createInsertSubScene();
-        createUpdateSubScene();
+        createInsertSubScene();
+        //createUpdateSubScene();
         show(stage);
     }
 
