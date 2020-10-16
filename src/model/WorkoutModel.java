@@ -1,7 +1,8 @@
 package model;
 
 import model.database_elements.DatabaseHandler;
-import java.util.Scanner;
+
+import java.sql.Timestamp;
 
 public class WorkoutModel {
 
@@ -24,16 +25,15 @@ public class WorkoutModel {
     }
 
     public void getDeleteDetails(int selectedIndex) {
-
         deleteManager.sqlDelete(this.databaseHandler, selectedIndex, this.displayManager.getLogObjects());
     }
 
-    public void getUpdateDetails() {
-        updateManager.sqlUpdate(this.databaseHandler, "some table", "some id");
+    public void getUpdateDetails(String type, float duration) {
+        updateManager.sqlUpdate(this.databaseHandler, type, duration);
     }
 
-    public void getInsertDetails() {
-        insertManager.sqlInsert(this.databaseHandler, "table name", "something");
+    public void getInsertDetails(String name, String type, float duration) {
+        insertManager.sqlInsert(this.databaseHandler, name, type, duration);
     }
 
     public DatabaseHandler getDatabaseHandler() {

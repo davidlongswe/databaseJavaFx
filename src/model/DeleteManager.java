@@ -20,9 +20,7 @@ public class DeleteManager {
             WorkoutLog workoutLog = logObjects.get(selectedIndex);
             String displayQuery = "DELETE FROM Workout_log WHERE user_id = " +
                     "" + workoutLog.getUser_id() + " AND workout_id = "
-                    + workoutLog.getWorkout_id() + " AND date = " + workoutLog.getTimestamp();
-            System.out.println(displayQuery);
-            //String displayQuery = "DELETE FROM Workout_log WHERE user_id = 3 AND workout_id = 2 AND date = '2020-09-05 14:15:26'";
+                    + workoutLog.getWorkout_id() + " AND date = " + "'" + workoutLog.getTimestamp() + "'";
             this.statement = dbh.getDbConnection().createStatement();
             this.resultSet = statement.executeQuery(displayQuery);
         } catch (SQLException e) {

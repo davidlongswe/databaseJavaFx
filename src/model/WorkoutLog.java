@@ -1,17 +1,13 @@
 package model;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 
 public class WorkoutLog {
 
     private int workout_id;
     private int user_id;
-    private Timestamp timestamp;
+    private String timestamp;
     private Float duration;
 
     public WorkoutLog() {}
@@ -32,12 +28,14 @@ public class WorkoutLog {
         this.user_id = user_id;
     }
 
-    public Timestamp getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
     public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+        String tsString = timestamp.toString();
+        String tsStringCorrected = tsString.substring(0, tsString.length() - 2);
+        this.timestamp = tsStringCorrected;
     }
 
     public Float getDuration() {

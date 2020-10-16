@@ -37,12 +37,6 @@ public class DisplayManager {
             e.printStackTrace();
         }
         dbh.disconnect();
-        for(WorkoutLog workoutLog : logObjects){
-            System.out.println(workoutLog.getUser_id());
-            System.out.println(workoutLog.getWorkout_id());
-            System.out.println(workoutLog.getDuration());
-            System.out.println(workoutLog.getTimestamp());
-        }
     }
 
     public void addWorkoutToWorkoutLog(){

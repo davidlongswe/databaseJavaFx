@@ -17,7 +17,7 @@ import view.subscenes.CustomSubScene;
 import java.util.ArrayList;
 
 
-public class WorkoutViewManager extends Application {
+public class App extends Application {
 
     private Button addBtn, updateBtn, deleteBtn, subSceneInsertBtn, subSceneUpdateBtn;
     private Label nameLabel;
@@ -36,10 +36,12 @@ public class WorkoutViewManager extends Application {
     private WorkoutModel workoutModel;
 
     private int selectedIndex = -1;
+    private ArrayList<String> dbWorkouts;
 
     @Override
     public void start(Stage stage) throws Exception {
         workoutModel = new WorkoutModel();
+        dbWorkouts = new ArrayList<>();
         setUpStage(stage);
         setUpMainLabel();
         createButtons();
@@ -123,20 +125,18 @@ public class WorkoutViewManager extends Application {
 
     private void createUpdateSubScene() {
         updateSubScene = new CustomSubScene();
-        updateVBox = new VBox();
-        updateVBox.setSpacing(5);
-        updateVBox.setPrefWidth(200);
-        updateVBox.setPadding(new Insets(10, 0, 0, 50));
-        updateVBox.setAlignment(Pos.CENTER);
+        updateVBox = createCustomVBox(updateVBox, 5, 200);
 
         updateNameLabel = new Label("Name");
-        updateName = new TextField();
         updateTypeLabel = new Label("Type");
-        updateType = new TextField();
         updateDurationLabel = new Label("Duration");
-        updateDuration = new TextField();
         updateDateLabel = new Label("Date");
+
+        updateName = new TextField();
+        updateType = new TextField();
+        updateDuration = new TextField();
         updateDate = new TextField();
+
         subSceneUpdateBtn = new Button("UPDATE");
 
         updateVBox.getChildren().addAll(updateNameLabel, updateName, updateTypeLabel, updateType,
@@ -147,18 +147,16 @@ public class WorkoutViewManager extends Application {
 
     private void createInsertSubScene() {
         insertSubScene = new CustomSubScene();
-        insertVBox = new VBox();
-        insertVBox.setSpacing(5);
-        insertVBox.setPrefWidth(200);
-        insertVBox.setPadding(new Insets(10, 0, 0, 50));
-        insertVBox.setAlignment(Pos.CENTER);
+        insertVBox = createCustomVBox(insertVBox, 5, 200);
 
         insertNameLabel = new Label("Name");
-        insertName = new TextField();
         insertTypeLabel = new Label("Type");
-        insertType = new TextField();
         insertDurationLabel = new Label("Duration");
+
+        insertName = new TextField();
+        insertType = new TextField();
         insertDuration = new TextField();
+
         subSceneInsertBtn = new Button("INSERT");
 
         insertVBox.getChildren().addAll(insertNameLabel, insertName,
@@ -167,36 +165,45 @@ public class WorkoutViewManager extends Application {
         ((Group) scene.getRoot()).getChildren().add(insertSubScene);
     }
 
+    public VBox createCustomVBox(VBox vb, int spacing, int width){
+        vb = new VBox();
+        vb.setSpacing(spacing);
+        vb.setPrefWidth(width);
+        vb.setPadding(new Insets(10, 0, 0, 50));
+        vb.setAlignment(Pos.CENTER);
+        return vb;
+    }
+
     public void displayList(){
         workoutModel.getDisplayDetails();
-        ArrayList<String> modelWorkouts = workoutModel.getDisplayManager().getWorkoutLogs();
-        workouts.addAll(modelWorkouts);
+        dbWorkouts = workoutModel.getDisplayManager().getWorkoutLogs();
+        workouts.addAll(dbWorkouts);
         myListView.setItems(workouts);
     }
 
     public void setButtonListeners(){
-        addBtn.setOnMouseClicked(mouseEvent -> {
-            showSubScene(insertSubScene);
-        });
-        subSceneInsertBtn.setOnMouseClicked(mouseEvent -> {
-            workoutModel.getInsertDetails();
-        });
-        subSceneUpdateBtn.setOnMouseClicked(mouseEvent -> {
-            workoutModel.getUpdateDetails();
-        });
-        updateBtn.setOnMouseClicked(mouseEvent ->  {
-            showSubScene(updateSubScene);
-        });
+        addBtn.setOnMouseClicked(mouseEvent -> showSubScene(insertSubScene));
+
+        subSceneInsertBtn.setOnMouseClicked(mouseEvent ->
+                workoutModel.getInsertDetails(
+                        insertName.getText(),
+                        insertType.getText(),
+                        Float.parseFloat(updateDuration.getText())));
+
+        subSceneUpdateBtn.setOnMouseClicked(mouseEvent ->
+                workoutModel.getUpdateDetails(
+                        updateType.getText(),
+                        Float.parseFloat(updateDuration.getText())));
+
+        updateBtn.setOnMouseClicked(mouseEvent -> showSubScene(updateSubScene));
+
         deleteBtn.setOnMouseClicked(mouseEvent -> {
-            workoutModel.getDeleteDetails(selectedIndex);
-
+            if(myListView.getSelectionModel().isSelected(selectedIndex)){
+                workoutModel.getDeleteDetails(selectedIndex);
+                myListView.getItems().remove(selectedIndex);
+            }
         });
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
 
 }
 
