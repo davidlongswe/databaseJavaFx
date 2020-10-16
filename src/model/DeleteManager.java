@@ -14,7 +14,7 @@ public class DeleteManager {
     public DeleteManager(){
     }
 
-    public void sqlDelete(DatabaseHandler dbh, String tableName, String ID){
+    public void sqlDelete(DatabaseHandler dbh){
         dbh.connect();
 
         dbh.disconnect();

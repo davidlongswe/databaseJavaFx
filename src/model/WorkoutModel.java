@@ -10,7 +10,6 @@ public class WorkoutModel {
     private DisplayManager displayManager;
     private InsertManager insertManager;
     private UpdateManager updateManager;
-    private Scanner scanner;
 
     public WorkoutModel(){
         this.databaseHandler = new DatabaseHandler();
@@ -18,58 +17,41 @@ public class WorkoutModel {
         this.displayManager = new DisplayManager();
         this.insertManager = new InsertManager();
         this.updateManager = new UpdateManager();
-        this.scanner = new Scanner(System.in);
     }
 
-    public void runProgram(){
-        queryUser();
+    public void getDisplayDetails() {
+        displayManager.sqlDisplay(this.databaseHandler);
     }
 
-    private void queryUser() {
-        int userChoice = scanner.nextInt();
-        do{
-            System.out.println("1. Insert new entry\n2. Update entry\n3. Delete entry\n4. Show table entries\n5. Quit");
-            switch(userChoice){
-                case 1:
-                    getInsertDetails();
-                    break;
-                case 2:
-                    getUpdateDetails();
-                    break;
-                case 3:
-                    getDeleteDetails();
-                    break;
-                case 4:
-                    getDisplayDetails();
-                    break;
-                case 5:
-                    System.exit(0);
-                    break;
-            }
-            userChoice = scanner.nextInt();
-        }while(userChoice != 5);
+    public void getDeleteDetails() {
+        deleteManager.sqlDelete(this.databaseHandler);
     }
 
-    private void getDisplayDetails() {
-        //TODO: ask user what they want to display
-        displayManager.sqlDisplay(this.databaseHandler, "table to display");
-    }
-
-    private void getDeleteDetails() {
-        //TODO: ask user what they want to delete
-        deleteManager.sqlDelete(this.databaseHandler, "entry to delete", "some id");
-
-    }
-
-    private void getUpdateDetails() {
-        //TODO: ask user what they want to update
+    public void getUpdateDetails() {
         updateManager.sqlUpdate(this.databaseHandler, "some table", "some id");
     }
 
-    private void getInsertDetails() {
-        //TODO: ask user what they want to insert
+    public void getInsertDetails() {
         insertManager.sqlInsert(this.databaseHandler, "table name", "something");
     }
 
+    public DatabaseHandler getDatabaseHandler() {
+        return databaseHandler;
+    }
 
+    public DeleteManager getDeleteManager() {
+        return deleteManager;
+    }
+
+    public DisplayManager getDisplayManager() {
+        return displayManager;
+    }
+
+    public InsertManager getInsertManager() {
+        return insertManager;
+    }
+
+    public UpdateManager getUpdateManager() {
+        return updateManager;
+    }
 }
